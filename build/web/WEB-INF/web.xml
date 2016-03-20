@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="2.5" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
+    <servlet>
+        <servlet-name>addMaintenanceLog</servlet-name>
+        <servlet-class>preventiveMaintenance.addMaintenanceLog</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>LoginServlet</servlet-name>
+        <servlet-class>com.prjkt.servlets.LoginServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>LoginServlet</servlet-name>
+        <url-pattern>/LoginServlet</url-pattern>
+    </servlet-mapping>
+    <session-config>
+        <session-timeout>
+            300
+        </session-timeout>
+    </session-config>
+    <security-constraint>
+        <display-name>equipmentConstraint</display-name>
+        <web-resource-collection>
+            <web-resource-name>equipmentTracking</web-resource-name>
+            <description/>
+            <url-pattern>/equipmentTracking/*</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <description/>
+            <role-name>equipmentRole</role-name>
+        </auth-constraint>
+    </security-constraint>    
+    <welcome-file-list>
+        <welcome-file>Login.jsp</welcome-file>
+    </welcome-file-list>
+    <login-config>
+        <auth-method>FORM</auth-method>
+        <realm-name>file</realm-name>
+        <form-login-config>
+            <form-login-page>/Login.jsp</form-login-page>
+            <form-error-page>/loginError.html</form-error-page>
+        </form-login-config>
+    </login-config>
+    <resource-ref>
+        <description>database for plant maintenance application</description>
+        <res-ref-name>jdbc/plantmaintenance</res-ref-name>
+        <res-type>javax.sql.DataSource</res-type>
+        <res-auth>Container</res-auth>
+        <res-sharing-scope>Shareable</res-sharing-scope>
+    </resource-ref>
+</web-app>
